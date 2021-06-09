@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="login" id="login">Login</a>
+</body>
+<script>
+    fetch('/GetUserData').then(response => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+            response.json().then(data => {
+                document.getElementById("login").style.display = 'none';
+                let message = document.createElement("h1");
+                message.innerText = "Hello " + data.firstName + " " + data.lastName;
+
+                document.body.appendChild(message);
+            });
+        }
+    });
+</script>
+</html>
